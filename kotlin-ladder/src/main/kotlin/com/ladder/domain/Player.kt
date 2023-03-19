@@ -2,7 +2,7 @@ package com.ladder.domain
 
 class Player(
     val name: String,
-    val column: String,
+    val column: Int,
 ) {
 
     init {

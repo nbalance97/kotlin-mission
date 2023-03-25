@@ -1,5 +1,8 @@
 package com.ladder;
 
-fun main() {
+import com.ladder.view.InputView
+import com.ladder.view.OutputView
 
+fun main() {
+    LadderApp().play()
 }

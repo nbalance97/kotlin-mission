@@ -1,20 +1,20 @@
 package com.ladder.domain
 
 
-private const val INITIAL_ROW = 1
+private const val INITIAL_ROW = 0
 
 class LadderBoard(
-    val height: Int,
-    val personCount: Int,
+    private val height: Int,
+    private val playerCount: Int,
 ) {
-    private val lines: MutableSet<Line> = mutableSetOf()
+    val lines: MutableSet<Line> = mutableSetOf()
 
     fun pushLine(line: Line) {
-        require(line.from.row in 1..height && line.to.row in 1..height) {
+        require(line.from.row in 0 until height && line.to.row in 0 until height) {
             "사다리의 행은 입력된 사다리 높이 이내여야 합니다."
         }
 
-        require(line.from.col in 1..personCount && line.to.col in 1..personCount) {
+        require(line.from.col in 0 until playerCount && line.to.col in 0 until playerCount) {
             "사다리의 열은 입력된 사람 수 이내여야 합니다."
         }
 
@@ -32,7 +32,7 @@ class LadderBoard(
         var y = column
         val visited = mutableSetOf<Position>()
 
-        while (x in 1..height) {
+        while (x in 0 until height) {
             val position = Position(x, y)
             visited.add(position)
 
@@ -40,7 +40,7 @@ class LadderBoard(
                 (it.from == position && it.to !in visited) || (it.to == position && it.from !in visited)
             }?.let {
                 y = if (it.from == position) it.to.col else it.from.col
-            } ?: { x++ }
+            } ?: x++
         }
 
         return Position(x, y)

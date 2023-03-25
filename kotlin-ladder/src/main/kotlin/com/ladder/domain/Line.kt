@@ -15,7 +15,17 @@ class Line(
             return false
         }
 
-        return (other.from == from || other.to == to) || (other.from == to || other.to == from)
+        return (other.from == from && other.to == to) || (other.from == to && other.to == from)
+    }
+
+    override fun toString(): String {
+        return "Line(from=$from, to=$to)"
+    }
+
+    override fun hashCode(): Int {
+        var result = from.hashCode()
+        result = 31 * result + to.hashCode()
+        return result
     }
 
     init {
